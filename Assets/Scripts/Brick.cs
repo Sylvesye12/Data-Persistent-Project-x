@@ -33,6 +33,7 @@ public class Brick : MonoBehaviour
         renderer.SetPropertyBlock(block);
     }
 
+    
     private void OnCollisionEnter(Collision other)
     {
         onDestroyed.Invoke(PointValue);

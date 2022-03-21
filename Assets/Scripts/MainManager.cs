@@ -9,16 +9,17 @@ public class MainManager : MonoBehaviour
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
-
+    public static string playerProfile;
+    
     public Text ScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
-    private int m_Points;
+    public static int m_Points;
     
     private bool m_GameOver = false;
 
-    
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -36,8 +37,11 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        Profile.instance.ProfileUpdate();
     }
 
+   
     private void Update()
     {
         if (!m_Started)
@@ -59,6 +63,11 @@ public class MainManager : MonoBehaviour
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
+         
         }
     }
 
@@ -67,6 +76,8 @@ public class MainManager : MonoBehaviour
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
     }
+
+    
 
     public void GameOver()
     {
